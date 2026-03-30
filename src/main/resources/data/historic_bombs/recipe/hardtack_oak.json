@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TNT",
+    "NAN",
+    "TNT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "A": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "id": "historic_bombs:hardtack_oak",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TNT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "id": "historic_bombs:smiling_buddha",
+    "count": 1
+  }
+}

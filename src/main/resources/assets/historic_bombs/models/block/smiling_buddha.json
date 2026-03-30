@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/smiling_buddha_top",
+    "down": "historic_bombs:block/smiling_buddha_bottom",
+    "north": "historic_bombs:block/smiling_buddha_side",
+    "south": "historic_bombs:block/smiling_buddha_side",
+    "east": "historic_bombs:block/smiling_buddha_side",
+    "west": "historic_bombs:block/smiling_buddha_side",
+    "particle": "historic_bombs:block/smiling_buddha_side"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/hardtack_poplar_top",
+    "down": "historic_bombs:block/hardtack_poplar_bottom",
+    "north": "historic_bombs:block/hardtack_poplar_side",
+    "south": "historic_bombs:block/hardtack_poplar_side",
+    "east": "historic_bombs:block/hardtack_poplar_side",
+    "west": "historic_bombs:block/hardtack_poplar_side",
+    "particle": "historic_bombs:block/hardtack_poplar_side"
+  }
+}

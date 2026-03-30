@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/davy_crockett_top",
+    "down": "historic_bombs:block/davy_crockett_bottom",
+    "north": "historic_bombs:block/davy_crockett_side",
+    "south": "historic_bombs:block/davy_crockett_side",
+    "east": "historic_bombs:block/davy_crockett_side",
+    "west": "historic_bombs:block/davy_crockett_side",
+    "particle": "historic_bombs:block/davy_crockett_side"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/fritz_x_top",
+    "down": "historic_bombs:block/fritz_x_bottom",
+    "north": "historic_bombs:block/fritz_x_side",
+    "south": "historic_bombs:block/fritz_x_side",
+    "east": "historic_bombs:block/fritz_x_side",
+    "west": "historic_bombs:block/fritz_x_side",
+    "particle": "historic_bombs:block/fritz_x_side"
+  }
+}

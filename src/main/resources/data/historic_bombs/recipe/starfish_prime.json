@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TDT",
+    "DNT",
+    "TDT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "id": "historic_bombs:starfish_prime",
+    "count": 1
+  }
+}

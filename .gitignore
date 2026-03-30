@@ -1,0 +1,25 @@
+# Gradle
+build/
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+bin/
+out/
+
+# NeoForge
+run/
+run-data/
+logs/
+src/generated/
+
+# OS
+.DS_Store
+Thumbs.db

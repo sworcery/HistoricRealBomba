@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/rds_1_top",
+    "down": "historic_bombs:block/rds_1_bottom",
+    "north": "historic_bombs:block/rds_1_side",
+    "south": "historic_bombs:block/rds_1_side",
+    "east": "historic_bombs:block/rds_1_side",
+    "west": "historic_bombs:block/rds_1_side",
+    "particle": "historic_bombs:block/rds_1_side"
+  }
+}

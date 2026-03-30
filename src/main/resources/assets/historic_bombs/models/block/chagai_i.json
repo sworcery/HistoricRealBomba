@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/chagai_i_top",
+    "down": "historic_bombs:block/chagai_i_bottom",
+    "north": "historic_bombs:block/chagai_i_side",
+    "south": "historic_bombs:block/chagai_i_side",
+    "east": "historic_bombs:block/chagai_i_side",
+    "west": "historic_bombs:block/chagai_i_side",
+    "particle": "historic_bombs:block/chagai_i_side"
+  }
+}

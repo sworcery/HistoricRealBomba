@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/redwing_tewa_top",
+    "down": "historic_bombs:block/redwing_tewa_bottom",
+    "north": "historic_bombs:block/redwing_tewa_side",
+    "south": "historic_bombs:block/redwing_tewa_side",
+    "east": "historic_bombs:block/redwing_tewa_side",
+    "west": "historic_bombs:block/redwing_tewa_side",
+    "particle": "historic_bombs:block/redwing_tewa_side"
+  }
+}

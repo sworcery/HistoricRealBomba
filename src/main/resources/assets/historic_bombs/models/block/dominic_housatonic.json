@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/dominic_housatonic_top",
+    "down": "historic_bombs:block/dominic_housatonic_bottom",
+    "north": "historic_bombs:block/dominic_housatonic_side",
+    "south": "historic_bombs:block/dominic_housatonic_side",
+    "east": "historic_bombs:block/dominic_housatonic_side",
+    "west": "historic_bombs:block/dominic_housatonic_side",
+    "particle": "historic_bombs:block/dominic_housatonic_side"
+  }
+}

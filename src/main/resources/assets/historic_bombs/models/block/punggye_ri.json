@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/punggye_ri_top",
+    "down": "historic_bombs:block/punggye_ri_bottom",
+    "north": "historic_bombs:block/punggye_ri_side",
+    "south": "historic_bombs:block/punggye_ri_side",
+    "east": "historic_bombs:block/punggye_ri_side",
+    "west": "historic_bombs:block/punggye_ri_side",
+    "particle": "historic_bombs:block/punggye_ri_side"
+  }
+}

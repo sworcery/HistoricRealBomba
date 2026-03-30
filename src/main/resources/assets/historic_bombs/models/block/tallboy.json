@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/tallboy_top",
+    "down": "historic_bombs:block/tallboy_bottom",
+    "north": "historic_bombs:block/tallboy_side",
+    "south": "historic_bombs:block/tallboy_side",
+    "east": "historic_bombs:block/tallboy_side",
+    "west": "historic_bombs:block/tallboy_side",
+    "particle": "historic_bombs:block/tallboy_side"
+  }
+}

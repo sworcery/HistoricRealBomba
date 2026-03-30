@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/test_147_top",
+    "down": "historic_bombs:block/test_147_bottom",
+    "north": "historic_bombs:block/test_147_side",
+    "south": "historic_bombs:block/test_147_side",
+    "east": "historic_bombs:block/test_147_side",
+    "west": "historic_bombs:block/test_147_side",
+    "particle": "historic_bombs:block/test_147_side"
+  }
+}

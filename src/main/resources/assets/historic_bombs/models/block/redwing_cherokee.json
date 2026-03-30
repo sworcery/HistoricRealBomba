@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "historic_bombs:block/redwing_cherokee_top",
+    "down": "historic_bombs:block/redwing_cherokee_bottom",
+    "north": "historic_bombs:block/redwing_cherokee_side",
+    "south": "historic_bombs:block/redwing_cherokee_side",
+    "east": "historic_bombs:block/redwing_cherokee_side",
+    "west": "historic_bombs:block/redwing_cherokee_side",
+    "particle": "historic_bombs:block/redwing_cherokee_side"
+  }
+}
