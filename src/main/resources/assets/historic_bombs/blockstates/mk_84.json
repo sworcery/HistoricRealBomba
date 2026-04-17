@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "unstable=false": {
+      "model": "historic_bombs:block/mk_84"
+    },
+    "unstable=true": {
       "model": "historic_bombs:block/mk_84"
     }
   }

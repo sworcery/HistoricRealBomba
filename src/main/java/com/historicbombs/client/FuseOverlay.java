@@ -10,44 +10,44 @@ import net.neoforged.api.distmarker.OnlyIn;
 import com.historicbombs.data.BombData;
 import com.historicbombs.entity.HistoricPrimedTNTEntity;
 
-/**
- * HUD overlay that displays a fuse countdown bar when any Historic Bomb is lit.
- * Shows the bomb name, seconds remaining, and a depleting progress bar
- * colored by category — turning red in the final 3 seconds.
- */
 @OnlyIn(Dist.CLIENT)
 public class FuseOverlay implements LayeredDraw.Layer {
 
     // Layout
     private static final int BAR_WIDTH = 200;
     private static final int BAR_HEIGHT = 8;
-    private static final int TOP_Y = 30; // Below boss bar area
+    private static final int TOP_Y = 30;
 
     // Colors
-    private static final int BG_COLOR = 0xC0000000;       // Semi-transparent black background
-    private static final int BAR_BG_COLOR = 0xFF333333;   // Empty bar track
-    private static final int BAR_BORDER = 0xFF111111;     // Bar outline
-    private static final int URGENT_COLOR = 0xFFFF2222;   // Red for last 3 seconds
-    private static final int TEXT_COLOR = 0xFFFFFFFF;      // White
-    private static final int TIME_COLOR = 0xFFFFDD44;      // Yellow for timer
+    private static final int BG_COLOR = 0xC0000000;
+    private static final int BAR_BG_COLOR = 0xFF333333;
+    private static final int BAR_BORDER = 0xFF111111;
+    private static final int URGENT_COLOR = 0xFFFF2222;
+    private static final int TEXT_COLOR = 0xFFFFFFFF;
+    private static final int TIME_COLOR = 0xFFFFDD44;
+    private static final int COUNT_COLOR = 0xFFFF8844;
+    private static final int URGENT_THRESHOLD_TICKS = 60;
 
     @Override
     public void render(GuiGraphics gfx, DeltaTracker deltaTracker) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.player == null) return;
-        // Don't show if a screen is open (menus, chat, etc.)
         if (mc.screen != null) return;
 
-        // Find the active bomb with the shortest fuse
+        // Single pass: find nearest bomb and count active bombs simultaneously
         HistoricPrimedTNTEntity nearest = null;
         int shortestFuse = Integer.MAX_VALUE;
+        long bombCount = 0;
 
         for (Entity entity : mc.level.entitiesForRendering()) {
             if (entity instanceof HistoricPrimedTNTEntity tnt) {
                 int fuse = tnt.getFuse();
-                if (fuse > 0 && fuse < shortestFuse) {
-                    shortestFuse = fuse;
-                    nearest = tnt;
+                if (fuse > 0) {
+                    bombCount++;
+                    if (fuse < shortestFuse) {
+                        shortestFuse = fuse;
+                        nearest = tnt;
+                    }
                 }
             }
         }
@@ -59,7 +59,7 @@ public class FuseOverlay implements LayeredDraw.Layer {
         int currentFuse = nearest.getFuse();
         int totalFuse = bomb.getFuseTicks();
 
-        // Smooth interpolation: subtract partial tick for smooth countdown
+        // Smooth interpolation
         float partialTick = deltaTracker.getGameTimeDeltaPartialTick(true);
         float smoothFuse = Math.max(0, currentFuse - partialTick);
         float secondsLeft = smoothFuse / 20.0f;
@@ -80,24 +80,22 @@ public class FuseOverlay implements LayeredDraw.Layer {
 
         // Bomb name
         String name = bomb.getDisplayName();
-        gfx.drawCenteredString(Minecraft.getInstance().font, name, centerX, TOP_Y - 1, TEXT_COLOR);
+        gfx.drawCenteredString(mc.font, name, centerX, TOP_Y - 1, TEXT_COLOR);
 
         // Progress bar
         int barTop = TOP_Y + 11;
         int barBottom = barTop + BAR_HEIGHT;
 
-        // Bar background (empty track)
+        // Bar background
         gfx.fill(barLeft - 1, barTop - 1, barRight + 1, barBottom + 1, BAR_BORDER);
         gfx.fill(barLeft, barTop, barRight, barBottom, BAR_BG_COLOR);
 
         // Filled portion
         int filledWidth = (int) (BAR_WIDTH * progress);
         if (filledWidth > 0) {
-            // Color: category color normally, red in last 3 seconds (60 ticks)
             int barColor;
-            if (smoothFuse <= 60) {
-                // Blend from category color to urgent red
-                float urgency = 1.0f - (smoothFuse / 60.0f);
+            if (smoothFuse <= URGENT_THRESHOLD_TICKS) {
+                float urgency = 1.0f - (smoothFuse / (float) URGENT_THRESHOLD_TICKS);
                 barColor = blendColors(0xFF000000 | bomb.getCategory().getColor(), URGENT_COLOR, urgency);
             } else {
                 barColor = 0xFF000000 | bomb.getCategory().getColor();
@@ -105,36 +103,18 @@ public class FuseOverlay implements LayeredDraw.Layer {
             gfx.fill(barLeft, barTop, barLeft + filledWidth, barBottom, barColor);
         }
 
-        // Time text on the right side of bar
+        // Time text on right
         String timeText = String.format("%.1fs", secondsLeft);
-        int timeX = barRight + 8;
-        gfx.drawString(Minecraft.getInstance().font, timeText, timeX, barTop, TIME_COLOR);
+        gfx.drawString(mc.font, timeText, barRight + 8, barTop, TIME_COLOR);
 
         // Count of active bombs (if more than 1)
-        long bombCount = countActiveBombs(mc);
         if (bombCount > 1) {
             String countText = bombCount + " bombs active";
-            int countX = panelLeft - Minecraft.getInstance().font.width(countText) - 4;
-            gfx.drawString(Minecraft.getInstance().font, countText, barLeft - 4 - Minecraft.getInstance().font.width(countText), barTop, 0xFFFF8844);
+            int countX = barLeft - 4 - mc.font.width(countText);
+            gfx.drawString(mc.font, countText, countX, barTop, COUNT_COLOR);
         }
     }
 
-    private long countActiveBombs(Minecraft mc) {
-        long count = 0;
-        for (Entity entity : mc.level.entitiesForRendering()) {
-            if (entity instanceof HistoricPrimedTNTEntity tnt && tnt.getFuse() > 0) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * Linearly blend two ARGB colors.
-     * @param color1 Starting color
-     * @param color2 Ending color
-     * @param t Blend factor 0.0 (all color1) to 1.0 (all color2)
-     */
     private static int blendColors(int color1, int color2, float t) {
         t = Math.max(0, Math.min(1, t));
         int a1 = (color1 >> 24) & 0xFF, r1 = (color1 >> 16) & 0xFF, g1 = (color1 >> 8) & 0xFF, b1 = color1 & 0xFF;

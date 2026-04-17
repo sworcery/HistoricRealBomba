@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "unstable=false": {
+      "model": "historic_bombs:block/rds_1"
+    },
+    "unstable=true": {
       "model": "historic_bombs:block/rds_1"
     }
   }

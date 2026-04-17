@@ -23,3 +23,14 @@ src/generated/
 # OS
 .DS_Store
 Thumbs.db
+
+# Secrets / credentials
+*.env
+.env
+secrets/
+*.pem
+*.key
+*.p12
+
+# Maven publish output
+repo/

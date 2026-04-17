@@ -336,9 +336,11 @@ def write_json(path, data):
 
 
 def generate_blockstate(name):
+    model = {"model": f"{MOD_ID}:block/{name}"}
     return {
         "variants": {
-            "": {"model": f"{MOD_ID}:block/{name}"}
+            "unstable=false": model,
+            "unstable=true": model
         }
     }
 

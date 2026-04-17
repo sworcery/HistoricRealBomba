@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "unstable=false": {
+      "model": "historic_bombs:block/castle_yankee_dnu"
+    },
+    "unstable=true": {
       "model": "historic_bombs:block/castle_yankee_dnu"
     }
   }

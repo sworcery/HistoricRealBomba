@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "unstable=false": {
+      "model": "historic_bombs:block/gbu_57_mop"
+    },
+    "unstable=true": {
       "model": "historic_bombs:block/gbu_57_mop"
     }
   }

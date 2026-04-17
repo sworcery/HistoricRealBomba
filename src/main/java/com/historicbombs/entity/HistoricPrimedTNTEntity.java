@@ -30,7 +30,7 @@ public class HistoricPrimedTNTEntity extends Entity implements TraceableEntity {
     public HistoricPrimedTNTEntity(EntityType<?> type, Level level) {
         super(type, level);
         this.blocksBuilding = true;
-        this.bombData = BombData.TSAR_BOMBA;
+        this.bombData = BombData.FRITZ_X;
     }
 
     public HistoricPrimedTNTEntity(Level level, double x, double y, double z,
@@ -51,7 +51,7 @@ public class HistoricPrimedTNTEntity extends Entity implements TraceableEntity {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(DATA_FUSE_ID, 80);
-        builder.define(DATA_BOMB_TYPE, BombData.TSAR_BOMBA.name());
+        builder.define(DATA_BOMB_TYPE, BombData.FRITZ_X.name());
     }
 
     @Override
@@ -102,19 +102,20 @@ public class HistoricPrimedTNTEntity extends Entity implements TraceableEntity {
 
     @Override
     protected void addAdditionalSaveData(CompoundTag tag) {
-        tag.putShort("Fuse", (short) this.getFuse());
+        tag.putInt("Fuse", this.getFuse());
         tag.putString("BombType", bombData.name());
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
-        this.setFuse(tag.getShort("Fuse"));
+        int loadedFuse = tag.contains("Fuse") ? tag.getInt("Fuse") : 80;
+        this.setFuse(Math.max(1, Math.min(loadedFuse, 600)));
         if (tag.contains("BombType")) {
             try {
                 this.bombData = BombData.valueOf(tag.getString("BombType"));
                 this.entityData.set(DATA_BOMB_TYPE, bombData.name());
             } catch (IllegalArgumentException e) {
-                this.bombData = BombData.TSAR_BOMBA;
+                this.bombData = BombData.FRITZ_X;
             }
         }
     }
@@ -130,11 +131,16 @@ public class HistoricPrimedTNTEntity extends Entity implements TraceableEntity {
     public BombData getBombData() {
         if (this.level().isClientSide()) {
             String typeName = this.entityData.get(DATA_BOMB_TYPE);
-            try {
-                return BombData.valueOf(typeName);
-            } catch (IllegalArgumentException e) {
-                return BombData.TSAR_BOMBA;
+            // Use cached value if synched data hasn't changed
+            if (bombData != null && bombData.name().equals(typeName)) {
+                return bombData;
             }
+            try {
+                bombData = BombData.valueOf(typeName);
+            } catch (IllegalArgumentException e) {
+                bombData = BombData.FRITZ_X;
+            }
+            return bombData;
         }
         return bombData;
     }

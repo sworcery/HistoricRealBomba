@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "unstable=false": {
+      "model": "historic_bombs:block/ivy_mike"
+    },
+    "unstable=true": {
       "model": "historic_bombs:block/ivy_mike"
     }
   }

@@ -8,6 +8,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import com.historicbombs.HistoricBombsMod;
+import com.historicbombs.config.HistoricBombsConfig;
 import com.historicbombs.data.BombCategory;
 import com.historicbombs.data.BombData;
 
@@ -45,10 +46,12 @@ public class ModCreativeTabs {
                             output.accept(ModItems.getItem(bomb).get());
                         }
                     }
-                    // DO NOT USE variants
-                    for (BombData bomb : BombData.values()) {
-                        if (bomb.getCategory() == BombCategory.DO_NOT_USE) {
-                            output.accept(ModItems.getItem(bomb).get());
+                    // DO NOT USE variants (only if enabled in config)
+                    if (HistoricBombsConfig.ENABLE_DNU_VARIANTS.get()) {
+                        for (BombData bomb : BombData.values()) {
+                            if (bomb.getCategory() == BombCategory.DO_NOT_USE) {
+                                output.accept(ModItems.getItem(bomb).get());
+                            }
                         }
                     }
                 })

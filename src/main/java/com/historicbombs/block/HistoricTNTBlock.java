@@ -85,7 +85,7 @@ public class HistoricTNTBlock extends Block {
         HistoricPrimedTNTEntity entity = new HistoricPrimedTNTEntity(level,
             pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, explosion.getIndirectSourceEntity(), bombData);
         int fuse = entity.getFuse();
-        entity.setFuse((short)(level.random.nextInt(fuse / 4) + fuse / 8));
+        entity.setFuse(level.random.nextInt(fuse / 4) + fuse / 8);
         level.addFreshEntity(entity);
     }
 

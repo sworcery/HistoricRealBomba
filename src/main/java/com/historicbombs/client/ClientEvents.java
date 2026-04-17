@@ -10,7 +10,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import com.historicbombs.HistoricBombsMod;
 import com.historicbombs.init.ModEntities;
 
-@EventBusSubscriber(modid = HistoricBombsMod.MOD_ID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = HistoricBombsMod.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ClientEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {

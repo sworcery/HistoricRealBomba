@@ -264,7 +264,7 @@ public class InfoScreen extends Screen {
             x + 8, y, maxWidth - 8, WARNING_COLOR);
         y += 2;
         y = drawWrappedText(gfx,
-            "The Tsar Bomba DNU has a 500-block explosion radius. You have been warned!",
+            "DNU variants have massive explosion radii that can destroy entire bases. You have been warned!",
             x, y, maxWidth, HAZARD_YELLOW);
         y += 2;
 
@@ -330,7 +330,7 @@ public class InfoScreen extends Screen {
         h += 2;
         h += LINE_HEIGHT * 3; // 3 bullet points
         h += 2;
-        h += countWrappedLines("The Tsar Bomba DNU has a 500-block explosion radius. You have been warned!", textWidth) * LINE_HEIGHT;
+        h += countWrappedLines("DNU variants have massive explosion radii that can destroy entire bases. You have been warned!", textWidth) * LINE_HEIGHT;
         h += 2;
         h += 3; // bottom stripes
         h += SECTION_GAP;

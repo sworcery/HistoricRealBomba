@@ -20,6 +20,7 @@ public class HistoricBombsMod {
         ModEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, HistoricBombsConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, HistoricBombsConfig.COMMON_SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, HistoricBombsConfig.CLIENT_SPEC);
     }
 }

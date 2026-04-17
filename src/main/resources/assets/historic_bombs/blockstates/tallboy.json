@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "unstable=false": {
+      "model": "historic_bombs:block/tallboy"
+    },
+    "unstable=true": {
       "model": "historic_bombs:block/tallboy"
     }
   }

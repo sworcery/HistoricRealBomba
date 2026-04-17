@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "unstable=false": {
+      "model": "historic_bombs:block/test_95_dnu"
+    },
+    "unstable=true": {
       "model": "historic_bombs:block/test_95_dnu"
     }
   }
