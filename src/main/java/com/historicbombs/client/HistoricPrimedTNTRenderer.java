@@ -9,7 +9,9 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.TntMinecartRenderer;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import com.historicbombs.data.BombData;
@@ -35,8 +37,13 @@ public class HistoricPrimedTNTRenderer extends EntityRenderer<HistoricPrimedTNTE
     public void extractRenderState(HistoricPrimedTNTEntity entity, HistoricTNTRenderState state, float partialTick) {
         super.extractRenderState(entity, state, partialTick);
         state.fuseRemainingInTicks = entity.getFuse() > 0 ? (float) entity.getFuse() - partialTick + 1.0F : -1.0F;
-        state.bombData = entity.getBombData();
-        state.blockState = ModBlocks.getBlock(entity.getBombData()).get().defaultBlockState();
+        BombData bombData = entity.getBombData();
+        state.bombData = bombData;
+        // Defensive null check — if a mod conflict removes the block, fall back to vanilla TNT
+        DeferredBlock<?> block = ModBlocks.getBlock(bombData);
+        state.blockState = (block != null && block.get() != null)
+            ? block.get().defaultBlockState()
+            : Blocks.TNT.defaultBlockState();
     }
 
     @Override

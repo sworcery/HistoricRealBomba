@@ -1,4 +1,9 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "historic_bombs:crafting_enabled"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "TTT",

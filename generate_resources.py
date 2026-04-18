@@ -412,8 +412,13 @@ def generate_lang():
 
 
 def generate_crafting_recipes():
-    """Generate crafting recipes based on the tiered system."""
+    """Generate crafting recipes based on the tiered system.
+    Each recipe is gated by the historic_bombs:crafting_enabled condition,
+    which reads the enableCrafting config value at recipe load time."""
     recipes = {}
+
+    # Condition wrapper applied to every recipe so they can be disabled via config
+    condition = [{"type": f"{MOD_ID}:crafting_enabled"}]
 
     for name, display_name, yield_kt, country, year, category, desc in BOMBS:
         if category == "dnu":
@@ -422,6 +427,7 @@ def generate_crafting_recipes():
         if category == "conventional":
             # Conventional: 4 TNT + 4 Iron Ingots + 1 Gunpowder
             recipes[name] = {
+                "neoforge:conditions": condition,
                 "type": "minecraft:crafting_shaped",
                 "pattern": ["TIT", "IGI", "TIT"],
                 "key": {
@@ -434,6 +440,7 @@ def generate_crafting_recipes():
         elif category == "thermobaric":
             # Thermobaric: 4 TNT + 4 Blaze Powder + 1 Fire Charge
             recipes[name] = {
+                "neoforge:conditions": condition,
                 "type": "minecraft:crafting_shaped",
                 "pattern": ["TBT", "BFB", "TBT"],
                 "key": {
@@ -446,6 +453,7 @@ def generate_crafting_recipes():
         elif yield_kt < 100:
             # Small nuclear: 8 TNT + 1 Nether Star
             recipes[name] = {
+                "neoforge:conditions": condition,
                 "type": "minecraft:crafting_shaped",
                 "pattern": ["TTT", "TNT", "TTT"],
                 "key": {
@@ -457,6 +465,7 @@ def generate_crafting_recipes():
         elif yield_kt < 5000:
             # Medium nuclear: 4 TNT + 4 Diamonds + 1 Nether Star
             recipes[name] = {
+                "neoforge:conditions": condition,
                 "type": "minecraft:crafting_shaped",
                 "pattern": ["TDT", "DNT", "TDT"],
                 "key": {
@@ -469,6 +478,7 @@ def generate_crafting_recipes():
         else:
             # Large nuclear: 4 TNT + 4 Netherite Ingots + 1 Nether Star
             recipes[name] = {
+                "neoforge:conditions": condition,
                 "type": "minecraft:crafting_shaped",
                 "pattern": ["TNT", "NAN", "TNT"],
                 "key": {
